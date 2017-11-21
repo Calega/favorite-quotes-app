@@ -13,7 +13,6 @@ export class QuotePage {
   text: string;
 
   // navParams to get data
-
   constructor(
     private viewCtrl: ViewController,
     private navParams: NavParams
@@ -24,8 +23,8 @@ export class QuotePage {
     this.text = this.navParams.get('text');
   }
 
-  onClose() {
-    this.viewCtrl.dismiss(); // deletes the page
+  onClose(remove = false) { // default value if no value is passed
+    this.viewCtrl.dismiss(remove); // deletes the page
   }
 
 }

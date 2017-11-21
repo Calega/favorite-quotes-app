@@ -27,5 +27,20 @@ export class FavoritesPage {
   onViewQuote(quote: Quote) {
     const modal = this.modalCtrl.create(QuotePage, quote);
     modal.present();
+
+    // remove argument sent from onClose method on quote.ts
+    // onDidDismiss is best when getting rid of ViewController
+    modal.onDidDismiss((remove: boolean) => {
+      if (remove) {
+        this.quotesService.removeQuoteFromFavorites(quote);
+
+        // removing the quote from the List on the page
+        const position = this.quotes.findIndex((quoteEl: Quote) => {
+          return quoteEl.id == quote.id;
+        });
+        this.quotes.splice(position, 1);
+      }
+    });
+
   }
 }
