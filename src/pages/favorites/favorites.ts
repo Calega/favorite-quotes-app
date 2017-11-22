@@ -32,15 +32,18 @@ export class FavoritesPage {
     // onDidDismiss is best when getting rid of ViewController
     modal.onDidDismiss((remove: boolean) => {
       if (remove) {
-        this.quotesService.removeQuoteFromFavorites(quote);
-
-        // removing the quote from the List on the page
-        const position = this.quotes.findIndex((quoteEl: Quote) => {
-          return quoteEl.id == quote.id;
-        });
-        this.quotes.splice(position, 1);
+        this.onRemoveFromFavorites(quote);
       }
     });
+  }
 
+  onRemoveFromFavorites(quote: Quote) {
+    this.quotesService.removeQuoteFromFavorites(quote);
+
+    // removing the quote from the List on the page
+    const position = this.quotes.findIndex((quoteEl: Quote) => {
+      return quoteEl.id == quote.id;
+    });
+    this.quotes.splice(position, 1);
   }
 }
